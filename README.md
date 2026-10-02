@@ -34,6 +34,14 @@ bash scripts/test.sh         # ejecuta la suite de pruebas
 El servidor se debe lanzar desde la raíz del proyecto para que encuentre
 `frontend/index.html`.
 
+## Probar en general
+
+```bash
+bash scripts/run-server.sh
+```
+
+Luego abre **http://localhost:8080** en el navegador.
+
 ## Arquitectura
 
 ```
@@ -96,6 +104,7 @@ hacia adentro y da **5.90**.
 | M6x | Decoradores propios extra (miel, avena, descafeinado, helado, Happy Hour) | **Implementado** |
 | M7 | Persistencia de pedidos (archivo/base de datos) | **Pendiente** |
 | M8 | Extras de interfaz (i18n ES/EN, tema oscuro, exportar recibo) | **Pendiente** |
+| M9 | Despliegue (empaquetado y publicación del servidor y el frontend) | **Pendiente** |
 
 El detalle de lo implementado y lo pendiente está en
 [`docs/IMPLEMENTATION_PLAN.md`](docs/IMPLEMENTATION_PLAN.md), con la guía de handoff
@@ -126,13 +135,3 @@ http://localhost:8080/?base=LATTE&size=LARGE&extras=SHOT,CARAMEL,WHIP
 > Nota: `com.sun.net.httpserver` vive en el módulo `jdk.httpserver`, que no se resuelve
 > por defecto en modo classpath. Los scripts lo añaden con `--add-modules jdk.httpserver`.
 > Si ejecutas a mano: `java --add-modules jdk.httpserver -cp out coffeeshop.CoffeeShopServer`.
-
-## Créditos
-
-Trabajo colaborativo del equipo:
-
-| Cuenta | Nombre | Rol |
-|---|---|---|
-| `Jenifrutica` | Jenifer Urbano | Infraestructura, capa de aplicación, diseño de interfaz |
-| `Drako2305` | Drako Salazar | Dominio (bebidas), demo y pruebas, SVG de la taza |
-| `miguelcebing` | Miguel Ceballos | Decoradores, backend HTTP, lógica del frontend |
