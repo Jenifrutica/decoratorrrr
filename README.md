@@ -86,18 +86,46 @@ hacia adentro y da **5.90**.
 
 | # | Módulo | Estado |
 |---|---|---|
-| M0 | Infraestructura, scripts y documentación | Ver `docs/IMPLEMENTATION_PLAN.md` |
-| M1 | Dominio: `Beverage` + bebidas concretas | Ver plan |
-| M2 | Decoradores base y decoradores concretos | Ver plan |
-| M3 | Capa de aplicación (`OrderService`, catálogo, modelos) | Ver plan |
-| M4 | Demo de consola y pruebas | Ver plan |
-| M5 | Backend HTTP (JDK `HttpServer`) | Ver plan |
-| M6 | Frontend gráfico (taza SVG, visualizador de cadena, recibo) | Ver plan |
-| M7 | Historial de pedidos y persistencia | **Pendiente** |
-| M8 | Extras de interfaz (i18n, temas, exportar recibo) | **Pendiente** |
+| M0 | Infraestructura, scripts y documentación | **Implementado** |
+| M1 | Dominio: `Beverage` + bebidas concretas | **Implementado** |
+| M2 | Decoradores base y decoradores del enunciado | **Implementado** |
+| M3 | Capa de aplicación (`OrderService`, catálogo, modelos) | **Implementado** |
+| M4 | Demo de consola y pruebas (15 casos) | **Implementado** |
+| M5 | Backend HTTP (JDK `HttpServer`) + JSON propio | **Implementado** |
+| M6 | Frontend gráfico (taza SVG, visualizador de cadena, recibo, historial) | **Implementado** |
+| M6x | Decoradores propios extra (miel, avena, descafeinado, helado, Happy Hour) | **Implementado** |
+| M7 | Persistencia de pedidos (archivo/base de datos) | **Pendiente** |
+| M8 | Extras de interfaz (i18n ES/EN, tema oscuro, exportar recibo) | **Pendiente** |
 
 El detalle de lo implementado y lo pendiente está en
-[`docs/IMPLEMENTATION_PLAN.md`](docs/IMPLEMENTATION_PLAN.md).
+[`docs/IMPLEMENTATION_PLAN.md`](docs/IMPLEMENTATION_PLAN.md), con la guía de handoff
+para el siguiente grupo.
+
+## API REST
+
+| Método | Ruta | Descripción |
+|---|---|---|
+| `GET` | `/api/catalog` | Bebidas, tamaños y extras con sus precios. |
+| `POST` | `/api/order` | Crea un pedido y devuelve descripción, total y desglose por capa. |
+| `GET` | `/api/orders` | Historial de pedidos, número y recaudo acumulado. |
+
+Ejemplo de petición:
+
+```bash
+curl -X POST http://localhost:8080/api/order \
+  -H 'Content-Type: application/json' \
+  -d '{"base":"LATTE","size":"LARGE","extras":["SHOT","CARAMEL"]}'
+```
+
+El frontend admite **deep-links** para compartir un pedido:
+
+```
+http://localhost:8080/?base=LATTE&size=LARGE&extras=SHOT,CARAMEL,WHIP
+```
+
+> Nota: `com.sun.net.httpserver` vive en el módulo `jdk.httpserver`, que no se resuelve
+> por defecto en modo classpath. Los scripts lo añaden con `--add-modules jdk.httpserver`.
+> Si ejecutas a mano: `java --add-modules jdk.httpserver -cp out coffeeshop.CoffeeShopServer`.
 
 ## Créditos
 

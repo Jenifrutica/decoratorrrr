@@ -41,11 +41,24 @@ Convenciones:
 
 ## 3. Módulos
 
+| # | Módulo | Estado |
+|---|---|---|
+| M0 | Infraestructura y documentación | Implementado |
+| M1 | Dominio: Component y bebidas | Implementado |
+| M2 | Decoradores del enunciado | Implementado |
+| M3 | Capa de aplicación | Implementado |
+| M4 | Demo y pruebas | Implementado |
+| M5 | Backend HTTP | Implementado |
+| M6 | Frontend gráfico | Implementado |
+| M6x | Decoradores propios extra | Implementado |
+| M7 | Persistencia | Pendiente |
+| M8 | Extras de interfaz | Pendiente |
+
 ### M0 — Infraestructura y documentación
 `.gitignore`, estructura de carpetas, scripts de build/ejecución/test, `README.md`,
 `CASE_STUDY.md` y este plan.
 
-**Estado: implementado (base).** El contenido de estado se actualiza al final de cada módulo.
+**Estado: implementado.**
 
 ### M1 — Dominio: Component y bebidas
 - `Beverage` (interface): `getDescription()`, `getCost()`, `getIngredients()`.
@@ -84,12 +97,23 @@ Convenciones:
 
 ## 4. Roadmap para el siguiente grupo (pendientes)
 
+Lo que **falta** implementar. El resto del sistema ya está funcional y es la base sobre la
+que continuar.
+
 | # | Pendiente | Notas |
 |---|---|---|
-| M7 | **Historial de pedidos y persistencia** | El historial ya viaja en memoria (`/api/orders`); falta persistirlo a archivo o base de datos, con paginación y totales. |
-| M8 | **Extras de interfaz** | Conmutador ES/EN, tema claro/oscuro, exportar/imprimir el recibo, accesibilidad avanzada. |
-| M9 | **Decoradores adicionales** | P. ej. `LoyaltyDecorator` (descuento por cliente frecuente), `SeasonalFlavorDecorator`, combos. |
-| M10 | **Constructor de decoradores en la UI** | Permitir al usuario combinar y reordenar capas y ver el efecto en la cadena. |
+| M7 | **Persistencia de pedidos** | El historial vive en memoria (`/api/orders`), por lo que se pierde al reiniciar. Falta guardarlo en archivo o base de datos, con carga al arrancar, paginación y totales por fecha. |
+| M8 | **Extras de interfaz** | Conmutador ES/EN, tema claro/oscuro, exportar/imprimir el recibo, accesibilidad avanzada y estados vacíos más ricos. |
+| M9 | **Decoradores adicionales** | P. ej. `LoyaltyDecorator` (descuento por cliente frecuente), `SeasonalFlavorDecorator` o combos, siempre creados a mano. |
+| M10 | **Constructor de decoradores en la UI** | Permitir al usuario combinar y **reordenar** capas y ver cómo cambia la cadena y el costo (el orden puede importar). |
+
+### Cómo continuar
+
+1. Partir de `main` y crear una rama por integrante (como en este proyecto).
+2. Respetar las restricciones: código en inglés, interfaz en español, decoradores propios
+   (sin decoradores de frameworks).
+3. Actualizar la tabla de estado de este documento y la del `README.md` al cerrar cada módulo.
+4. Verificar con `scripts/test.sh` y `scripts/build.sh` antes de integrar.
 
 ## 5. Cómo compilar y verificar
 
